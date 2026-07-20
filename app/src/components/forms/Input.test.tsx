@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Input } from './Input';
 
 describe('Input Component', () => {
@@ -15,5 +15,26 @@ describe('Input Component', () => {
     
     const input = screen.getByPlaceholderText('Enter pass');
     expect(input.className).toContain('border-destructive');
+  });
+
+  it('toggles password visibility when eye icon is clicked', () => {
+    render(<Input label="Password" type="password" placeholder="Enter pass" />);
+    const input = screen.getByPlaceholderText('Enter pass');
+    
+    // Initially type is password
+    expect(input).toHaveAttribute('type', 'password');
+    
+    // Find and click the eye button
+    const toggleButton = screen.getByRole('button');
+    fireEvent.click(toggleButton);
+    
+    // Type should now be text
+    expect(input).toHaveAttribute('type', 'text');
+    
+    // Click again
+    fireEvent.click(toggleButton);
+    
+    // Type should be password again
+    expect(input).toHaveAttribute('type', 'password');
   });
 });
