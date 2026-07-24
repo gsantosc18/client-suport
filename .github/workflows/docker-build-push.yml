@@ -22,7 +22,7 @@ jobs:
       - name: Log in to private registry
         uses: docker/login-action@v2
         with:
-          registry: registry.advocase.site
+          registry: registry.advocase.online
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
@@ -33,8 +33,8 @@ jobs:
           file: ./backend/Dockerfile
           push: true
           tags: |
-            registry.advocase.site/client-support/backend:${{ github.event.release.tag_name }}
-            registry.advocase.site/client-support/backend:latest
+            registry.advocase.online/client-support/backend:${{ github.event.release.tag_name }}
+            registry.advocase.online/client-support/backend:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -55,7 +55,7 @@ jobs:
       - name: Log in to private registry
         uses: docker/login-action@v2
         with:
-          registry: registry.advocase.site
+          registry: registry.advocase.online
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
@@ -69,8 +69,8 @@ jobs:
             BACKEND_URL=${{ vars.BACKEND_URL }}
             NEXT_PUBLIC_COMPANY_ID=${{ vars.NEXT_PUBLIC_COMPANY_ID }}
           tags: |
-            registry.advocase.site/client-support/app:${{ github.event.release.tag_name }}
-            registry.advocase.site/client-support/app:latest
+            registry.advocase.online/client-support/app:${{ github.event.release.tag_name }}
+            registry.advocase.online/client-support/app:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
